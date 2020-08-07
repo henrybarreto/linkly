@@ -12,11 +12,11 @@ To acess the link, the user need to go for a get route, what it is the alias lin
 ## Avalible scripts
 In this project, you can:
 
-Runs the app in the development mode. 
+Runs the app in the development mode.<br/>
 `npm run dev`
 
-Building the project to dist folder
+Building the project to dist folder.<br/>
 `npm run build`
 
-Starting project from builded folder
+Starting project from builded folder.<br/>
 `npm run start`
