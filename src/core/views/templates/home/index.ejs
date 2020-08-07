@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang=<%= lang %>>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        header, body, input, textarea {
+          font-size: 12px;
+          font-family: 'Ubuntu', sans-serif; 
+        }
+        .container {
+          display: grid;
+          grid-template-rows: 0.5fr 1.5fr 0.5fr;
+          grid-template-columns: 1fr;
+          grid-template-areas: 
+          "header"
+          "link"
+          "footer";
+          min-width: 100%;
+          min-height: 100vh;
+        }
+        .header {
+          grid-area: header;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        .header__logo--text {
+          font-size: 10em;
+        }
+        .header__logo--description {
+          font-size: 2em;
+        }
+        .link {
+          grid-area: link;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        }
+        .link_result {
+          padding: 12.5px;
+          margin: 10px 0;
+          max-width: 400px;
+          max-height: 50px;
+          border:1px solid #000;
+          transition: width 2s;
+        }
+        .link_result__text {
+          font-size: 1em;
+          font-weight: lighter;
+          text-align: center;
+        }
+        .link_form {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin: 0;
+          padding: 12.5px;
+          max-width: 400px;
+          height: 250px;
+          border: 1px solid #000000;
+        }
+        .link_form__label {
+          padding: 0;
+          margin: 0 10px;
+          align-self: center;
+          font-size: 1.5em;
+        }
+        .link_form__input {
+          padding: 0 10px;
+          margin: 5px;
+          max-width: 300px;
+          height: 50px;
+          border: 1px solid #000000;
+          font-size: 1.2rem;
+        }
+        .link_form__input--full_link {
+        }
+        .link_form__input--short_link {
+        }
+        .link_form__button
+        {
+          padding: 0;
+          margin: 5px;
+          width: 100px;
+          height: 50px;
+          border: 1px solid #000000;
+          font-weight: bold;
+        }
+        .footer {
+          grid-area: footer;
+          width: 100%;
+          height: 50vh;
+          background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+          <h1 class="header__logo--text">Linkly</h1>
+          <h2 class="header__logo--description">Alias your links</h2>
+        </header>
+        <main class="link">
+            <div class="link_result" id="link_result">
+              <p class="link_result__text" id="link_result__text"></p>
+            </div>
+            <form class="link_form" id="link_form">
+                <label for="link_form__input--full_link" class="link_form__label link_form__label--full_link">Full Link</label>
+                <input name="link_form__input--full_link" class="link_form__input link_form__input--full_link" id="link_form__input--full_link" type="text" />
+                <label for="link_form__input--short_link" class="link_form__label link_for__label--short__link">Link Alias</label>
+                <input name="link_form__input--short_link" class="link_form__input link_form__input--short_link" id="link_form__input--short_link" type="text" />
+                <button name="link_form__button" class="link_form__button" id="link_form__button" type="submit">Incurtar</button>
+            </form>
+          </main>
+        <footer class="footer"></footer>
+    </div>
+</body>
+<script>
+  const form = useElement("#link_form");
+  const formInputFullLink = useElement("#link_form__input--full_link");
+  const formInputShortLink = useElement("#link_form__input--short_link");
+  const formButton = useElement("#link_form__button");
+  const linkResult = useElement("#link_result");
+  const linkResultText = useElement("#link_result__text");
+
+  function useInput(element) {
+    const value = (function(element)
+    {
+      return element.value;
+    })(element);
+    const setValue = function(value)
+    {
+      return element.value = value;
+    }
+
+    return [value, setValue];
+  }
+  function useText(element) {
+    const value = (function(element)
+    {
+      return element.innerText;
+    })(element);
+    const setValue = function(value)
+    {
+      return element.innerText = value;
+    }
+
+    return [value, setValue];
+  }
+  function useElement(tag) {
+    const element = document.querySelector(tag);
+    // console.log(element);
+    return element;
+  }
+  
+  // const [input, setInput] = useInput(useElement("#link_form__input--full_link"));
+  // console.log(input());
+
+  async function requestRegisterLink(link, data) {
+      const request =  await fetch(link, { 
+        method: "post", 
+        headers: { "Accept": "application/json", "Content-Type": "application/json" }, 
+        body: JSON.stringify(data) 
+        });
+        console.log('Making request');
+      return await request.json();
+  }
+  function msgFromRequestLink(status) {
+      switch(status) {
+        case 0:
+          return "Link registred!";
+          break;
+        case 1:
+          return "Link already registred";
+          break;
+        case 2:
+          return "A input is invalid";
+          break;
+        default:
+          return "Other error!";
+          break;
+      }
+  }
+
+  form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const [fullLink, setFullLink] = useInput(formInputFullLink);
+      const [ShortLink, setShortLink] = useInput(formInputShortLink);
+
+      const [link, setLink] = useText(linkResultText);
+
+      try {
+      linkResultText.innerText = "Loading...";
+      
+      const requestResponse = await requestRegisterLink("/link", 
+      { fullLink: fullLink, shortLink: ShortLink });
+
+      setLink(msgFromRequestLink(requestResponse.status));
+      } catch (e) {
+        linkResultText.innerText = "A connection error rised!";
+        console.log(e);
+      }
+  });
+
+</script>
+</html>

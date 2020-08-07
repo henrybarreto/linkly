@@ -1,0 +1,34 @@
+{
+  "name": "linkly",
+  "description": "A link shortener",
+  "version": "1.0.0",
+  "author": {
+    "name": "Henry Barreto",
+    "email": "athenrybarreto@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.27"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "eslint": "^7.5.0",
+    "eslint-config-google": "^0.14.0",
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -e js,ejs,json --watch src/ --exec babel-node src/index.js",
+    "build": "babel -D --verbose src/ -d dist/",
+    "start": "node dist/index.js"
+  }
+}
