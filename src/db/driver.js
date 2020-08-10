@@ -5,26 +5,13 @@ export class Driver { // To Fix
 }
 
 export class MongooseDriver extends Driver { // To fix
-  constructor() {
-    super();
-    this.module = mongoose;
-  }
-}
-
-export class LinklMongooseDriver extends MongooseDriver {
   constructor(mongooseConnectionString) {
     super();
+    this.module = mongoose;
     this.connectionString = mongooseConnectionString;
-    this.linklySchema = new this.module.Schema(({
-      fullLink: String,
-      shortLink: String,
-    }));
-    this.LinklyModel = this.module.model('link', this.linklySchema);
 
     this.connect = this.connect.bind(this);
     this.desconnect = this.desconnect.bind(this);
-    this.save = this.save.bind(this);
-    this.find = this.find.bind(this);
   }
   connect() {
     this.module.connect(this.connectionString, {useUnifiedTopology: true});
@@ -35,6 +22,20 @@ export class LinklMongooseDriver extends MongooseDriver {
   }
   desconnect() {
     this.module.connection.close();
+  }
+}
+
+export class LinklMongooseDriver extends MongooseDriver {
+  constructor(mongooseConnectionString) {
+    super(mongooseConnectionString);
+    this.linklySchema = new this.module.Schema(({
+      fullLink: String,
+      shortLink: String,
+    }));
+    this.LinklyModel = this.module.model('link', this.linklySchema);
+
+    this.save = this.save.bind(this);
+    this.find = this.find.bind(this);
   }
   save(data, callback) {
     const ModelToSave = new this.LinklyModel({
