@@ -28,7 +28,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -e js,ejs,json --watch src/ --exec babel-node src/index.js",
-    "build": "babel -D --verbose src/ -d dist/",
+    "build": "babel -D --verbose src/ --ignore src/static -d dist/",
     "start": "node dist/index.js"
   }
 }

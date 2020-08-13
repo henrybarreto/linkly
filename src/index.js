@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 app.use(Express.json());
 app.use(Express.urlencoded());
 
-app.use('/static', Express.static(Path.join(__dirname + '/../static')));
+app.use('/static', Express.static(Path.join(__dirname + '/static')));
 
 app.use(routes);
 
