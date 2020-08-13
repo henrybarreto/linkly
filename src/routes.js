@@ -17,8 +17,8 @@ routes.get(aboutController.path.get, aboutController.get);
 routes.get(linkController.path.get, linkController.get);
 routes.post(linkController.path.post, linkController.post);
 
-routes.all(/./, (req, res) => {
+/* routes.all(/./, (req, res) => {
   res.redirect('/');
-});
+}); */
 
 export default routes;

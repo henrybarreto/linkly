@@ -10,13 +10,15 @@ import routes from './routes.js';
 const app = new Express();
 const db = new Db(new Driver(process.env.MONGODB_CONNECTION_STRING));
 
+db.connect();
+
 app.set('views', Path.join(__dirname, '/core/views/templates'));
 app.set('view engine', 'ejs');
 
 app.use(Express.json());
 app.use(Express.urlencoded());
 
-db.connect();
+app.use('/static', Express.static(Path.join(__dirname + '/../static')));
 
 app.use(routes);
 
