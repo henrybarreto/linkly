@@ -149,11 +149,11 @@
   function useText(element) {
     const value = (function(element)
     {
-      return element.innerText;
+      return element.textContent;
     })(element);
     const setValue = function(value)
     {
-      return element.innerText = value;
+      return element.textContent = value;
     }
 
     return [value, setValue];
@@ -163,10 +163,10 @@
     // console.log(element);
     return element;
   }
+  function useEvent(event, element, callback) {
+    return element.addEventListener(event, callback);
+  }
   
-  // const [input, setInput] = useInput(useElement("#link_form__input--full_link"));
-  // console.log(input());
-
   async function requestRegisterLink(link, data) {
       const request =  await fetch(link, { 
         method: "post", 
@@ -174,10 +174,8 @@
         body: JSON.stringify(data) 
         });
         console.log('Making request');
-      return await request.json();
-  }
-  function msgFromRequestLink(status) {
-      switch(status) {
+      return [await request.json(), function(status) {
+        switch(status) {
         case 0:
           return "Link registred!";
           break;
@@ -191,25 +189,26 @@
           return "Other error!";
           break;
       }
+      }];
   }
 
-  form.addEventListener("submit", async function(event) {
+  useEvent("submit", form, async function(event) {
       event.preventDefault();
 
       const [fullLink, setFullLink] = useInput(formInputFullLink);
-      const [ShortLink, setShortLink] = useInput(formInputShortLink);
+      const [shortLink, setShortLink] = useInput(formInputShortLink);
 
       const [link, setLink] = useText(linkResultText);
 
       try {
-      linkResultText.innerText = "Loading...";
+        setLink("Loading...");
       
-      const requestResponse = await requestRegisterLink("/link", 
-      { fullLink: fullLink, shortLink: ShortLink });
+        const [requestResponse, resquetResponseMsg] = await requestRegisterLink("/link", 
+        { fullLink: fullLink, shortLink: shortLink });
 
-      setLink(msgFromRequestLink(requestResponse.status));
+        setLink(resquetResponseMsg(requestResponse.status));
       } catch (e) {
-        linkResultText.innerText = "A connection error rised!";
+        setLink("A connection error rised!");
         console.log(e);
       }
   });
