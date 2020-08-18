@@ -1,24 +1,24 @@
 import Express from 'express';
-import Path from 'path';
-import Db, {DbEvent} from './db/db';
-import {LinklMongooseDriver as Driver} from './db/driver';
+import path from 'path';
+import Db, {DbEvent} from './Db';
+import {MongooseNosqlDriver as NosqlDriver} from './drivers/NosqlDriver';
 
 import 'dotenv/config';
 
 import routes from './routes.js';
 
 const app = new Express();
-const db = new Db(new Driver(process.env.MONGODB_CONNECTION_STRING));
+const db = new Db(new NosqlDriver(process.env.MONGODB_URL));
 
 db.connect();
 
-app.set('views', Path.join(__dirname, '/core/views/templates'));
+app.set('views', path.join(__dirname, '/views/templates'));
 app.set('view engine', 'ejs');
 
 app.use(Express.json());
 app.use(Express.urlencoded());
 
-app.use('/static', Express.static(Path.join(__dirname + '/static')));
+app.use('/static', Express.static(path.join(__dirname + '/static')));
 
 app.use(routes);
 

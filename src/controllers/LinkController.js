@@ -1,12 +1,12 @@
 /* eslint-disable require-jsdoc */
 import LinkView from '../views/LinkView';
-import LinkModel from '../models/LinkModel';
+import LinkService from '../services/LinkService';
 
 export default class LinkController {
   constructor() {
     this.data = {};
     this.view = new LinkView();
-    this.model = new LinkModel();
+    this.service = new LinkService();
     this.path = {
       get: '/:link',
       post: '/link',
@@ -18,7 +18,7 @@ export default class LinkController {
 
   get(req, res) {
     const shortLinkRegEx = new RegExp(req.params.link);
-    this.model.find(shortLinkRegEx, (err, resul) => {
+    this.service.find(shortLinkRegEx, (err, resul) => {
       if (resul) {
         res.redirect(resul.fullLink);
         // Going to template file, then redirect to link
@@ -31,7 +31,7 @@ export default class LinkController {
   post(req, res) {
     res.setHeader('Content-Type', 'application/json');
     try {
-      this.model.save(
+      this.service.save(
           {fullLink: req.body.fullLink, shortLink: req.body.shortLink},
           (err, resul) => {
             switch (resul) {

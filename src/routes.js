@@ -1,9 +1,9 @@
 import {Router} from 'express';
 
 // To Fix
-import HomeController from './core/controllers/HomeController';
-import AboutController from './core/controllers/AboutController';
-import LinkController from './core/controllers/LinkController';
+import HomeController from './controllers/HomeController';
+import AboutController from './controllers/AboutController';
+import LinkController from './controllers/LinkController';
 
 const homeController = new HomeController();
 const aboutController = new AboutController();
@@ -17,8 +17,8 @@ routes.get(aboutController.path.get, aboutController.get);
 routes.get(linkController.path.get, linkController.get);
 routes.post(linkController.path.post, linkController.post);
 
-/* routes.all(/./, (req, res) => {
+routes.all(/./, (req, res) => {
   res.redirect('/');
-}); */
+});
 
 export default routes;
