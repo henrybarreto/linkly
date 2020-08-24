@@ -5,4 +5,3 @@ export const routes = new Router();
 const aboutController = new AboutController();
 
 routes.get(aboutController.path.get, aboutController.get);
-
