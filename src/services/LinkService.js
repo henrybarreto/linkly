@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import {DbEvent} from '../Db';
+import {DbEvent} from '../database';
 import LinkModel from '../models/LinkModel';
 
 export default class LinkService {
