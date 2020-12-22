@@ -2,8 +2,10 @@ import mongoose from 'mongoose';
 
 async function dbConnect(MONGODB_URL) {
   try {
-    const conn = await mongoose.connect(MONGODB_URL,{ useNewUrlParser: true, useUnifiedTopology: true});
-
+    const conn = await mongoose.connect(MONGODB_URL,{ 
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true});
     return conn;
   } catch(error) {
     console.error(error);

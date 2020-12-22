@@ -29,7 +29,8 @@ function _dbConnect() {
             _context.next = 3;
             return _mongoose["default"].connect(MONGODB_URL, {
               useNewUrlParser: true,
-              useUnifiedTopology: true
+              useUnifiedTopology: true,
+              useCreateIndex: true
             });
 
           case 3:
