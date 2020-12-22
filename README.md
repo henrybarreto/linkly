@@ -1,22 +1,76 @@
 # Linkly
+**API to short link**
 
-**Link alias**
 
-* This is an study case project to learn how to set up a **Babel environment**, to use **Express** and **MongoDB** to build  a API to serve a client.
+### This is an study case project: 
+- **Babel environment**
+- **Express**
+- **MongoDB**
 
-## Specifications
-Basicaly, it is simple system. a client send a link and a alias to that link to register. If everything goes okay, the link will be added to the database.
-To acess the link, the user need to go for a get route, what it is the alias link, to be redirected. 
+## How to use
+| METHOD | URI          | 
+|--------|--------------|
+| POST   | /link        |
+| GET    | /{shortLink} |
+| DEL    | /link        |
 
+### Erro's code
+| CODE | RESULT    |
+|------|-----------| 
+|0| Created        |
+|1| Already exist  |
+|2| {link}         |
+|3| Not found      |
+
+### Examples
+```javascript
+// POST -> /link
+// ...
+await axios.post('/link',{
+  "link": "https://www.google.com/",
+  "shortLink" :"goo", 
+  "author": "Henry"
+})
+// ...
+```
+
+```javascript
+// GET -> /{shortLink}
+// ...
+let result = await axios.get('/goo');
+console.log(resul);
+
+/* 
+Output:
+{
+  link: "https://www.google.com/",
+  shortLink: "goo",
+  author: "Henry"
+}*/
+```
+
+## Disclaimer
+- This project was completed refactored to be more functional(I tried)
+- Error handler will be improved soon
+- Tests
+- Auth
+- Input sanitizing
+- and so on ... 
 
 ## Avalible scripts
-In this project, you can:
+In this project you can:
 
 Runs the app in the development mode.<br/>
-`npm run dev`
+```bash
+npm run dev
+```
 
 Building the project to dist folder.<br/>
-`npm run build`
+```bash
+npm run build
+```
 
-Starting project from builded folder.<br/>
-`npm run start`
+Starting project from dist folder.<br/>
+```bash
+npm start
+```
