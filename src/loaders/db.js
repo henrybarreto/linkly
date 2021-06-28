@@ -1,5 +1,6 @@
 import * as Db from '../database/db_moogose_connection';
 
+// eslint-disable-next-line require-jsdoc
 async function loadDb() {
   try {
     await Db.dbConnect(process.env.MONGODB_URL) ?
@@ -11,4 +12,4 @@ async function loadDb() {
   }
 }
 
-export default loadDb;
+export default loadDb();

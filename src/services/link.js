@@ -1,11 +1,11 @@
 // import link from '../controllers/link';
-import { response } from 'express';
 import Model from '../models/link';
 
+// eslint-disable-next-line require-jsdoc
 async function getLink(shortLink) {
   try {
-    let linkFinded = await Model.findOne({
-      shortLink
+    const linkFinded = await Model.findOne({
+      shortLink,
     }).exec();
     return linkFinded;
   } catch (error) {
@@ -14,21 +14,24 @@ async function getLink(shortLink) {
   }
 }
 
+// eslint-disable-next-line require-jsdoc
 async function createLink(link, shortLink, author) {
   try {
-    let linkToSave = new Model({
+    const linkToSave = new Model({
       link,
       shortLink,
-      author  
+      author,
     });
     await linkToSave.save();
     return linkToSave;
-  } catch(error) {
+  } catch (error) {
     return undefined;
   }
 }
 
-function deleteLink(shortlink) {  
+// eslint-disable-next-line require-jsdoc
+function deleteLink(shortlink) {
+  // TODO
 }
 
-export {getLink, createLink, deleteLink}
+export {getLink, createLink, deleteLink};

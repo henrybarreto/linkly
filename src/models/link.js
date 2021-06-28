@@ -5,7 +5,7 @@ const schema = new Schema({
     type: 'String',
     required: true,
     trim: true,
-    lowercase: true
+    lowercase: true,
   },
   shortLink: {
     type: 'String',
@@ -13,14 +13,13 @@ const schema = new Schema({
     trim: true,
     lowercase: true,
     unique: true,
-    dropDups: true
+    dropDups: true,
   },
   author: {
     type: 'String',
     required: true,
     trim: true,
     lowercase: true,
-    lowercase: true
   },
 });
 

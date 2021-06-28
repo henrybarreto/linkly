@@ -1,5 +1,6 @@
-const CONTROLLER_SERVER_ERROR_MSG = "Internal Server Error";
+const CONTROLLER_SERVER_ERROR_MSG = 'Internal Server Error';
 
+// eslint-disable-next-line require-jsdoc
 export function responseJSONStatus(response, data, code) {
   response.status(code);
   response.json(data);
@@ -8,8 +9,8 @@ export function responseJSONStatus(response, data, code) {
 
 /**
  * Bad Request
- * @param {*} response 
- * @param {*} data 
+ * @param {*} response
+ * @param {*} data
  */
 export function responseJSON400Status(response, data) {
   return responseJSONStatus(response, data, 400);
@@ -17,8 +18,8 @@ export function responseJSON400Status(response, data) {
 
 /**
  * Not found
- * @param {*} response 
- * @param {*} data 
+ * @param {*} response
+ * @param {*} data
  */
 export function responseJSON404Status(response, data) {
   return responseJSONStatus(response, data, 404);
@@ -26,8 +27,8 @@ export function responseJSON404Status(response, data) {
 
 /**
  * Conflict
- * @param {*} response 
- * @param {*} data 
+ * @param {*} response
+ * @param {*} data
  */
 export function responseJSON409Status(response, data) {
   return responseJSONStatus(response, data, 409);
@@ -35,38 +36,38 @@ export function responseJSON409Status(response, data) {
 
 /**
  * Ok
- * @param {*} reponse 
- * @param {*} data 
+ * @param {*} reponse
+ * @param {*} data
  */
 export function responseJSON200Status(reponse, data) { // Ok
-  return responseJSONStatus(reponse, data, 200);  
+  return responseJSONStatus(reponse, data, 200);
 }
 
 
 /**
  * Created
- * @param {*} reponse 
- * @param {*} data 
+ * @param {*} reponse
+ * @param {*} data
  */
 export function responseJSON201Status(reponse, data) { // Created
-  return responseJSONStatus(reponse, data, 201);  
+  return responseJSONStatus(reponse, data, 201);
 }
 
 /**
  * Accepted
- * @param {*} reponse 
- * @param {*} data 
+ * @param {*} reponse
+ * @param {*} data
  */
 export function responseJSON202Status(reponse, data) {
-  return responseJSONStatus(reponse, data, 202);  
+  return responseJSONStatus(reponse, data, 202);
 }
 
 /**
  * Internal Server Error
- * @param {*} response 
+ * @param {*} response
  */
 export function responseJSON500Status(response) {
   return responseJSONStatus(response, {
-    message: CONTROLLER_SERVER_ERROR_MSG
+    message: CONTROLLER_SERVER_ERROR_MSG,
   }, 500);
 }
