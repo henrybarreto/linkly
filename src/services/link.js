@@ -1,5 +1,5 @@
 // import link from '../controllers/link';
-import Model from '../models/link';
+import Model from '../models/link.js';
 
 // eslint-disable-next-line require-jsdoc
 async function getLink(shortLink) {

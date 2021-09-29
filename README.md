@@ -59,12 +59,19 @@ Runs the app in the development mode.<br/>
 npm run dev
 ```
 
-Building the project to dist folder.<br/>
-```bash
-npm run build
-```
-
 Starting project from dist folder.<br/>
 ```bash
 npm start
+```
+
+### Docker
+
+Build the image:
+```sh
+docker build --target linkly-dev -t linkly .
+```
+
+Run the container:
+```sh
+docker run -p 80:3000 --mount type=bind,source="$(pwd)",target=/app linkly
 ```

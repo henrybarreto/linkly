@@ -1,14 +1,17 @@
 {
   "name": "linkly",
-  "description": "A link shortener",
+  "description": "",
   "version": "1.0.0",
+  "private": "true",
+  "type": "module",
   "author": {
     "name": "Henry Barreto",
-    "email": "athenrybarreto@gmail.com"
+    "email": "contato@henrybarreto.dev"
   },
   "license": "MIT",
   "keywords": [],
-  "main": "src/index.js",
+  "main": "src/server.js",
+  "engines": {"node": "^16.9.1"},
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
@@ -16,14 +19,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/node": "^7.10.5",
-    "@babel/plugin-transform-runtime": "^7.12.10",
-    "@babel/preset-env": "^7.10.4",
     "@types/mongoose": "^5.10.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-runtime": "^6.26.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.5.0",
     "eslint-config-google": "^0.14.0",
@@ -32,8 +28,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "nodemon --watch src/ --exec babel-node src/server.js",
-    "build": "babel -D --verbose src/ -d dist/",
-    "start": "node dist/server.js"
+    "dev": "nodemon --watch src/ src/server.js",
+    "start": "node src/server.js"
   }
 }
