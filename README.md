@@ -1,11 +1,6 @@
 # Linkly
-**API to short link**
+Linkly is a simple Back-end application to short links.
 
-
-### This is an study case project: 
-- **Babel environment**
-- **Express**
-- **MongoDB**
 
 ## How to use
 | METHOD | URI          | 
@@ -49,9 +44,8 @@ Output:
 }*/
 ```
 
-## Disclaimer
-- This project was completed refactored to be more functional(I tried)
-- Error handler will be improved soon
+## Improviments needed
+- Error handler
 - Tests
 - Auth
 - Input sanitizing
