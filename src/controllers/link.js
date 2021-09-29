@@ -1,11 +1,11 @@
-import {getLink, createLink} from '../services/link';
+import {getLink, createLink} from '../services/link.js';
 import {
   responseJSON200Status,
   responseJSON202Status,
   responseJSON400Status,
   responseJSON404Status,
   responseJSON500Status,
-} from '../services/http';
+} from '../services/http.js';
 
 // eslint-disable-next-line require-jsdoc
 async function get(request, response, next) {
