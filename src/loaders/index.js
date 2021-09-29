@@ -1,1 +1,0 @@
-export {loadDb} from './db';

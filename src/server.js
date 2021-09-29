@@ -1,9 +1,9 @@
 'use strict'
 import Express from 'express';
-import router from './api/link';
+import router from './api/link.js';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import loadDb from './loader/db';
+import loadDb from './loaders/db.js';
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ dotenv.config();
   server.use(router);
 
   server.listen(process.env.PORT, async () => {
-    console.log('Server listing...');
     loadDb();
+    console.log('Server listing...');
   });
 })();

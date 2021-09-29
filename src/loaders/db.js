@@ -1,13 +1,14 @@
-import * as Db from '../database/db_moogose_connection';
+import * as Db from '../database/db_moogose_connection.js';
 
 // eslint-disable-next-line require-jsdoc
 async function loadDb() {
   try {
     await Db.dbConnect(process.env.MONGODB_URL) ?
-    console.log('Connected with DB!') :
-    console.log('Erro on Mongoose connection');
+    console.info('Connected with DB!') :
+    process.exit(0);
   } catch (error) {
-    console.log(error);
+    console.log('Could not connect to the database')
+    console.error(error);
     process.exit(0);
   }
 }
